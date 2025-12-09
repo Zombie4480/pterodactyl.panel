@@ -1,0 +1,152 @@
+version: 28
+
+settings:
+  velocity-compression: 256
+  region-file-cache-size: 256
+
+timings:
+  enabled: true
+  verbose: false
+  server-name-anonymization: false
+  hidden-config-entries:
+    - database.password
+
+misc:
+  lag-compensate-spawning: true
+  use-display-name-in-quit-message: false
+  load-permissions-yml-before-plugins: true
+
+chunk-loading:
+  min-load-radius: 2
+  max-concurrent-sends: 2
+  autoload-period: 0
+  player-max-chunk-load-rate: 100
+  global-max-chunk-load-rate: 2000
+  global-max-chunk-load-rate: 500
+
+chunk-loading-advanced:
+  player-max-concurrent-chunk-generates: 1
+  player-max-concurrent-chunk-loads: 4
+  global-max-concurrent-chunk-generates: 10
+  global-max-concurrent-chunk-loads: 100
+
+anti-xray:
+  enabled: false
+  engine-mode: 1
+  max-block-height: 64
+  update-radius: 2
+  lava-obscures: false
+  hide-blocks:
+    - copper_ore
+    - deepslate_copper_ore
+    - gold_ore
+    - deepslate_gold_ore
+    - iron_ore
+    - deepslate_iron_ore
+    - coal_ore
+    - deepslate_coal_ore
+    - lapis_ore
+    - deepslate_lapis_ore
+    - redstone_ore
+    - deepslate_redstone_ore
+    - diamond_ore
+    - deepslate_diamond_ore
+    - emerald_ore
+    - deepslate_emerald_ore
+
+world-settings:
+  default:
+    verbose: false
+    merge-radius:
+      item: 2.5
+      exp: 3.0
+
+    max-auto-save-chunks-per-tick: 24
+    max-chunk-sends-per-tick: 81
+    max-chunk-gens-per-tick: 10
+
+    damage-entity:
+      removed-by-default: false
+
+    entity-tracking-range:
+      players: 48
+      animals: 48
+      monsters: 48
+      misc: 32
+      other: 64
+
+    hungry-size: 8
+    marker-packet-set: true
+    max-projectile-preload: 8
+
+    entity-per-chunk-save-limit:
+      experience_orb: -1
+      snowball: -1
+      ender_pearl: -1
+      arrow: -1
+
+    prevent-moving-into-unloaded-chunks: false
+
+    hopper:
+      cooldown-when-full: true
+      disable-move-event: false
+
+    allow-non-player-entities-on-scoreboards: false
+
+    use-faster-eigencraft-redstone: false
+
+    fix-curing-zombie-villager-discount-exploit: true
+
+    falling-block-height-nerf: 0
+
+    tnt-entity-height-nerf: 0
+
+    armor-stands-do-collision-entity-lookups: true
+
+    map-item-frame-cursor-limit: 128
+
+    despawn-ranges:
+      soft: 32
+      hard: 128
+
+    fishing-time-range:
+      MinimumTicks: 100
+      MaximumTicks: 600
+
+    fixed-chunk-inhabited-time: -1
+
+    remove-corrupt-tile-entities: false
+
+    mobs-can-always-pick-up-loot:
+      zombies: false
+      skeletons: false
+
+    creative-arrow-despawn-rate: 20
+
+    experience-merge-max-value: 2147483647
+
+    max-entity-collisions: 8
+
+    treasure-maps:
+      enabled: true
+      find-already-explored: false
+
+    split-overstacked-items: true
+
+    use-faster-eigencraft-redstone: false
+
+    max-loads-per-tick: 10
+
+    view-distances:
+      no-tick: 0
+      tick: 0
+
+    ender-dragon-death-always-leaves-dragon-egg: false
+
+    seed-based-feature-search: true
+
+    disable-chest-cat-detection: false
+
+    optimize-expirable-map-iteration: true
+
+    max-block-light: null

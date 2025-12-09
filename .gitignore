@@ -1,0 +1,34 @@
+.git/
+*.log
+.DS_Store
+.env.local
+.env.*.local
+node_modules/
+dist/
+build/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.env
+
+# Docker volumes
+mysql/
+redis/
+pterodactyl/var/
+pterodactyl/storage/
+pterodactyl/public/
+
+# Server data
+servers/*/world/
+servers/*/logs/
+
+# Backup archives
+backups/*.tar.gz
+backups/*.zip
+
+# Temporary files
+tmp/
+temp/
+*.tmp

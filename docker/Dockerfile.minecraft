@@ -1,0 +1,33 @@
+FROM openjdk:17-jdk-slim
+
+WORKDIR /minecraft
+
+# Установка необходимых зависимостей
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Скачивание Paper Server (рекомендуемый сервер Minecraft)
+ENV PAPER_VERSION=latest
+RUN wget https://api.papermc.io/v2/projects/paper/versions/1.20.4/builds/133/downloads/paper-1.20.4-133.jar \
+    -O /minecraft/server.jar
+
+# Принятие EULA
+RUN echo "eula=true" > /minecraft/eula.txt
+
+# Создание директорий для плагинов и конфигов
+RUN mkdir -p /minecraft/plugins \
+    && mkdir -p /minecraft/config \
+    && mkdir -p /minecraft/world
+
+# Конфигурация сервера
+COPY server.properties /minecraft/server.properties
+
+# Экспорт портов
+EXPOSE 25565
+
+# Запуск сервера
+CMD ["java", "-Xmx${MAX_MEMORY}G", "-Xms${MIN_MEMORY}G", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=200", "-jar", "server.jar", "nogui"]

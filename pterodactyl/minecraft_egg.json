@@ -1,0 +1,69 @@
+{
+  "id": "minecraft",
+  "name": "Minecraft Java Edition",
+  "author": "Pterodactyl Admin",
+  "description": "Minecraft Java Edition Server",
+  "version": "1.0.0",
+  "docker_images": {
+    "java17": "eclipse-temurin:17"
+  },
+  "startup": "java -Xmx{{SERVER_MEMORY}}M -Xms{{SERVER_MEMORY}}M -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -jar server.jar nogui",
+  "config": {
+    "files": {
+      "server.properties": {
+        "parser": "properties",
+        "find": {
+          "server-port": "{{SERVER_PORT}}",
+          "server-ip": "0.0.0.0",
+          "max-players": "{{SERVER_MAX_PLAYERS}}",
+          "motd": "Pterodactyl Minecraft Server"
+        }
+      }
+    },
+    "startup": {
+      "done": "Done (",
+      "userInteraction": []
+    },
+    "logs": {
+      "custom": false,
+      "location": "logs/latest.log"
+    },
+    "stop": "say Server is stopping...\nstop"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nset -e\necho \"Downloading Minecraft Server...\"\nwget https://launcher.mojang.com/v1/objects/1b557e7b033b583cd9f66746b7a9ab1ec3298da2/server.jar -O server.jar\n\necho \"Generating EULA...\"\necho \"eula=true\" > eula.txt\n\necho \"Installation complete!\"\n",
+      "container": "java17",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Server Memory",
+      "description": "Максимальный объем памяти в МБ для сервера",
+      "env_variable": "SERVER_MEMORY",
+      "default_value": "1024",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|numeric|min:512"
+    },
+    {
+      "name": "Max Players",
+      "description": "Максимальное количество игроков на сервере",
+      "env_variable": "SERVER_MAX_PLAYERS",
+      "default_value": "20",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|numeric|min:1|max:100"
+    },
+    {
+      "name": "Server Port",
+      "description": "Порт сервера Minecraft",
+      "env_variable": "SERVER_PORT",
+      "default_value": "25565",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|numeric"
+    }
+  ]
+}

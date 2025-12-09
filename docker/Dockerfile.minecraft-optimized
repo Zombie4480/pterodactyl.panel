@@ -1,0 +1,33 @@
+FROM eclipse-temurin:17-jdk-jammy
+
+LABEL maintainer="Pterodactyl Admin"
+LABEL description="Pterodactyl Minecraft Java Edition Docker Image"
+
+# Установка необходимых утилит
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    wget \
+    git \
+    unzip \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Создание пользователя для сервера
+RUN useradd -m -u 1000 minecraft
+
+# Установка рабочей директории
+WORKDIR /home/minecraft
+
+# Переключение на пользователя minecraft
+USER minecraft
+
+# Параметры по умолчанию для памяти
+ENV MAX_MEMORY=1024
+ENV MIN_MEMORY=512
+
+# Порт сервера
+EXPOSE 25565/tcp
+EXPOSE 25575/tcp
+
+# Команда по умолчанию (переопределяется в docker-compose или при запуске контейнера)
+CMD ["sh", "-c", "java -Xmx${MAX_MEMORY}M -Xms${MIN_MEMORY}M -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:G1NewCollectionHousekeepingIntervalInMs=0 -XX:G1SummarizeRSetStatsPeriodMs=36000 -XX:SurvivorRatio=20 -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -jar server.jar nogui"]
