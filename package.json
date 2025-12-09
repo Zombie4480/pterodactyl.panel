@@ -1,0 +1,52 @@
+{
+  "name": "pterodactyl-minecraft-hosting",
+  "description": "Полнофункциональная платформа для хостинга Minecraft серверов на Pterodactyl Panel",
+  "version": "1.0.0",
+  "author": "Pterodactyl Admin",
+  "license": "MIT",
+  "scripts": {
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "restart": "docker-compose restart",
+    "logs": "docker-compose logs -f",
+    "init": "bash scripts/init_pterodactyl.sh",
+    "quickstart": "bash QUICKSTART.md",
+    "server:start": "bash scripts/start_minecraft_server.sh",
+    "server:manage": "bash scripts/manage_server.sh"
+  },
+  "keywords": [
+    "pterodactyl",
+    "minecraft",
+    "hosting",
+    "game-server",
+    "docker",
+    "panel",
+    "wings"
+  ],
+  "directories": {
+    "docker": "Docker конфигурации и Dockerfile",
+    "pterodactyl": "Конфигурации Pterodactyl Panel и Eggs",
+    "minecraft": "Конфигурация Minecraft серверов",
+    "scripts": "Управляющие и вспомогательные скрипты",
+    "config": "Конфигурационные файлы",
+    "servers": "Директория для серверов Minecraft",
+    "backups": "Резервные копии серверов"
+  },
+  "requirements": {
+    "docker": "20.10+",
+    "docker-compose": "1.29+",
+    "memory": "4GB minimum, 8GB+ recommended",
+    "disk": "20GB minimum, 100GB+ recommended for SSD",
+    "os": "Linux (Ubuntu 20.04+, CentOS 7+, Debian 10+)"
+  },
+  "ports": {
+    "panel": 80,
+    "panel_ssl": 443,
+    "wings": 8080,
+    "wings_ssl": 8443,
+    "mysql": 3306,
+    "redis": 6379,
+    "minecraft": 25565,
+    "rcon": 25575
+  }
+}
